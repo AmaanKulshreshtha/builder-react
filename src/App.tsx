@@ -12,6 +12,7 @@ export default function CatchAllRoute() {
   const isPreviewingInBuilder = useIsPreviewing();
   const [notFound, setNotFound] = useState(false);
   const [content, setContent] = useState();
+  const [builderContentJson, setBuilderContentJson] = useState()
 
   // get the page content from Builder
    useEffect(() => {
@@ -33,6 +34,13 @@ export default function CatchAllRoute() {
     }
     fetchContent();
   }, [window.location.pathname]);
+
+  
+    useEffect(() => { 
+      builder.get('ui-components', { url: location.pathname })
+        .promise().then(setBuilderContentJson)
+    }, [])
+  
   
   // If no page is found, return 
   // a 404 page from your code.
@@ -47,6 +55,7 @@ export default function CatchAllRoute() {
     <>
       {/* Render the Builder page */}
       <BuilderComponent model="page" content={content} />
+      <BuilderComponent model="ui-components" content={builderContentJson} />
     </>
   );
 }
