@@ -11,7 +11,7 @@ builder.init('2f4d17cef66e4a49820decb197b96197');
 export default function CatchAllRoute() {
   const isPreviewingInBuilder = useIsPreviewing();
   const [notFound, setNotFound] = useState(false);
-  const [content, setContent] = useState(null);
+  const [content, setContent] = useState();
 
   // get the page content from Builder
    useEffect(() => {
