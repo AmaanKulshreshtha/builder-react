@@ -13,6 +13,7 @@ export default function CatchAllRoute() {
   const [notFound, setNotFound] = useState(false);
   const [content, setContent] = useState();
   const [builderContentJson, setBuilderContentJson] = useState()
+  const [figmaBuilderContentJson, setFigmaBuilderContentJson] = useState()
 
   // get the page content from Builder
    useEffect(() => {
@@ -40,6 +41,11 @@ export default function CatchAllRoute() {
       builder.get('ui-components', { url: location.pathname })
         .promise().then(setBuilderContentJson)
     }, [])
+
+    useEffect(() => { 
+      builder.get('figma-import', { url: location.pathname })
+        .promise().then(setFigmaBuilderContentJson)
+    }, [])
   
   
   // If no page is found, return 
@@ -56,6 +62,7 @@ export default function CatchAllRoute() {
       {/* Render the Builder page */}
       <BuilderComponent model="page" content={content} />
       <BuilderComponent model="ui-components" content={builderContentJson} />
+      <BuilderComponent model="figma-import" content={figmaBuilderContentJson} />
     </>
   );
 }
