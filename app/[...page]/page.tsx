@@ -1,6 +1,6 @@
 import { builder } from "@builder.io/sdk";
 import { RenderBuilderContent } from "../../components/builder";
-import Header from '@/components/Header/Header';
+import Header from "@/components/Header/Header";
 
 // Builder Public API Key set in .env file
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
@@ -25,11 +25,20 @@ export default async function Page(props: PageProps) {
     // Convert the result to a promise
     .toPromise();
 
+  const subwayHeroSection = await builder
+    .get("subway-hero", {
+      userAttributes: {
+        urlPath: "/" + (props?.params?.page?.join("/") || ""),
+      },
+    })
+    .toPromise();
+
   return (
     <>
       {/* Render the Builder page */}
       <Header />
       <RenderBuilderContent content={content} />
+      <RenderBuilderContent content={subwayHeroSection} />
       {/* <div><h1>Footer</h1></div> */}
     </>
   );
