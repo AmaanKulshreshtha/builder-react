@@ -38,7 +38,6 @@ export default async function Page(props: PageProps) {
       {/* Render the Builder page */}
       <Header />
       <RenderBuilderContent content={content} />
-      <RenderBuilderContent content={subwayHeroSection} />
       {/* <div><h1>Footer</h1></div> */}
     </>
   );
